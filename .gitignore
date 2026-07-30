@@ -9,3 +9,4 @@ coverage/
 !.env.example
 firebase-applet-config.json
 serviceAccountKey.json
+*.zip
