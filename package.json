@@ -14,9 +14,10 @@
   "dependencies": {
     "@google/genai": "^2.14.0",
     "@tailwindcss/vite": "^4.1.14",
+    "@types/dotenv": "^6.1.1",
     "@vitejs/plugin-react": "^5.0.4",
     "brace-expansion": "^5.0.9",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "express": "^4.21.2",
     "firebase": "^12.16.0",
     "firebase-admin": "^14.1.0",

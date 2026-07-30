@@ -258,13 +258,14 @@ The user has direct, 1-click interface buttons ("Replace Notebook", "Append", "I
       let response;
       try {
         response = await ai.models.generateContentStream({
-          model: "gemini-2.0-flash", // <-- Corrected model name
+          model: "gemini-2.5-flash", // <-- Corrected model name
           contents,
           config: {
             systemInstruction: systemInstruction,
           }
         });
       } catch (genError: any) {
+        console.log("👉 RAW ERROR OBJECT:", genError);
         logDebug(`Gemini API Generation Error: ${genError.message}`);
         console.error("Gemini API Generation Error:", genError);
         
