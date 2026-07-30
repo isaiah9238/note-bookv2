@@ -21,13 +21,13 @@ if (fs.existsSync(serviceAccountPath)) {
   
   initializeApp({
     credential: cert(serviceAccount),
-    projectId: process.env.VITE_FIREBASE_PROJECT_ID || "ai-studio-a4f62319-0eb1-4822-830d-5503fef8b512",
+    projectId: process.env.VITE_FIREBASE_PROJECT_ID || "gen-lang-client-0989083154",
   });
 } else {
   // Fallback for local development if key is missing (uses offline token decoding)
   console.warn("⚠️ serviceAccountKey.json not found. Falling back to default initialization.");
   initializeApp({
-    projectId: process.env.VITE_FIREBASE_PROJECT_ID || "ai-studio-a4f62319-0eb1-4822-830d-5503fef8b512",
+    projectId: process.env.VITE_FIREBASE_PROJECT_ID || "gen-lang-client-0989083154",
   });
 }
 
