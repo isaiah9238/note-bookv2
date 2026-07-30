@@ -6,6 +6,8 @@ import { GoogleGenAI } from "@google/genai";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 
+const appUrl = process.env.APP_URL || "http://localhost:3000";
+
 const LOG_FILE = path.join(process.cwd(), "debug.log");
 const logDebug = (msg: string) => {
   fs.appendFileSync(LOG_FILE, `[${new Date().toISOString()}] ${msg}\n`);
