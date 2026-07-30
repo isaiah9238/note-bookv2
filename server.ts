@@ -1,5 +1,13 @@
-import express from "express";
 import path from "path";
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
+
+console.log("=== GEMINI KEY CHECK ===");
+console.log("Key exists:", !!process.env.GEMINI_API_KEY);
+console.log("Key preview:", process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.slice(0, 8) + "..." : "UNDEFINED");
+console.log("========================");
+
+import express from "express";
 import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
@@ -59,12 +67,19 @@ if (!fs.existsSync(DNE_LIST_PATH)) {
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
+  vertexAI: false,
   httpOptions: {
     headers: {
       'User-Agent': 'aistudio-build',
     }
   }
 });
+
+if (!process.env.GEMINI_API_KEY) {
+  console.error("❌ GEMINI_API_KEY is undefined! Check your .env.local file path and key name.");
+} else {
+  console.log("✅ GEMINI_API_KEY loaded successfully.");
+}
 
 async function startServer() {
   const app = express();
@@ -243,7 +258,7 @@ The user has direct, 1-click interface buttons ("Replace Notebook", "Append", "I
       let response;
       try {
         response = await ai.models.generateContentStream({
-          model: "gemini-2.5-flash",
+          model: "gemini-2.0-flash", // <-- Corrected model name
           contents,
           config: {
             systemInstruction: systemInstruction,
@@ -254,7 +269,17 @@ The user has direct, 1-click interface buttons ("Replace Notebook", "Append", "I
         console.error("Gemini API Generation Error:", genError);
         
         let errMsg = genError.message || String(genError);
+
+        // Catch Invalid / Missing API Key
         if (
+          errMsg.includes("API_KEY_INVALID") ||
+          errMsg.includes("API key not valid") ||
+          errMsg.includes("INVALID_ARGUMENT")
+        ) {
+          errMsg = "Invalid or missing GEMINI_API_KEY. Please check your server environment configuration.";
+        } 
+        // Catch Quota / Credit / Rate Limits
+        else if (
           errMsg.includes("prepayment credits") ||
           errMsg.includes("RESOURCE_EXHAUSTED") ||
           errMsg.includes("429") ||
@@ -262,6 +287,7 @@ The user has direct, 1-click interface buttons ("Replace Notebook", "Append", "I
         ) {
           errMsg = "The Gemini AI service is temporarily unavailable due to depleted API credits or rate limits. Please try again later or contact the notebook owner.";
         }
+
         return res.status(500).json({ error: errMsg });
       }
 
