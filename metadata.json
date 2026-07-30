@@ -1,5 +1,5 @@
 {
-  "name": "note-book",
+  "name": "note-bookv2",
   "description": "A minimalist note book with the possibility for embedded components, with an AI companion.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
