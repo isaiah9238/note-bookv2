@@ -9,8 +9,6 @@ import {
   onAuthStateChanged 
 } from "firebase/auth";
 
-const appUrl = import.meta.env.VITE_APP_URL || window.location.origin;
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -19,6 +17,11 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
+// Client Environment Safeguard
+if (!firebaseConfig.apiKey) {
+  console.warn("⚠️ VITE_FIREBASE_API_KEY is missing in .env.local!");
+}
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
@@ -38,6 +41,13 @@ export async function signInWithGoogle() {
   }
 }
 
+// Helper to fetch the current ID token for server API calls
+export async function getIdToken(): Promise<string | null> {
+  const currentUser = auth.currentUser;
+  if (!currentUser) return null;
+  return await currentUser.getIdToken();
+}
+
 export async function signOutUser() {
   try {
     await signOut(auth);
@@ -48,4 +58,3 @@ export async function signOutUser() {
 }
 
 export { onAuthStateChanged };
-
