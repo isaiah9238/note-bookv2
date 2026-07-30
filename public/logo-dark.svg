@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Canvas Background -->
+  <rect width="500" height="500" fill="#000000" />
+
+  <g fill="#00FF66">
+    <!-- LEFT SIDE -->
+    <!-- Inner Bracket -->
+    <rect x="170" y="120" width="40" height="40" />
+    <rect x="200" y="120" width="10" height="260" />
+    <rect x="170" y="340" width="40" height="40" />
+
+    <!-- Middle Bracket -->
+    <rect x="90" y="180" width="40" height="30" />
+    <rect x="120" y="180" width="10" height="140" />
+    <rect x="90" y="290" width="40" height="30" />
+
+    <!-- Outer Bracket -->
+    <rect x="40" y="215" width="25" height="20" />
+    <rect x="60" y="215" width="5" height="70" />
+    <rect x="40" y="265" width="25" height="20" />
+
+    <!-- RIGHT SIDE -->
+    <!-- Inner Bracket -->
+    <rect x="290" y="120" width="40" height="40" />
+    <rect x="290" y="120" width="10" height="260" />
+    <rect x="290" y="340" width="40" height="40" />
+
+    <!-- Middle Bracket -->
+    <rect x="370" y="180" width="40" height="30" />
+    <rect x="370" y="180" width="10" height="140" />
+    <rect x="370" y="290" width="40" height="30" />
+
+    <!-- Outer Bracket -->
+    <rect x="435" y="215" width="25" height="20" />
+    <rect x="435" y="215" width="5" height="70" />
+    <rect x="435" y="265" width="25" height="20" />
+  </g>
+</svg>

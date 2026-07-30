@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Draft": {
+      "title": "Draft",
+      "description": "A notebook draft, belonging to an authenticated user.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "ownerName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "number",
+          "description": "Timestamp"
+        }
+      },
+      "required": ["content", "userId", "updatedAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "A real-time access or update event log.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["visit", "edit", "chat"]
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userEmail": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": ["type", "userName", "userEmail", "details", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/drafts/{draftId}": {
+      "schema": {
+        "$ref": "#/entities/Draft"
+      },
+      "description": "Collection of personal drafts."
+    },
+    "/activity_logs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/ActivityLog"
+      },
+      "description": "Real-time activity and access logs."
+    }
+  }
+}
