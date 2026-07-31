@@ -1,4 +1,5 @@
 import path, { resolve, dirname } from "path";
+import { VertexAI } from '@google-cloud/vertexai';
 import fs from "fs";
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -16,6 +17,34 @@ import { GoogleGenAI } from "@google/genai";
 import { initializeApp, cert, getApps, getApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
+
+const vertexAI = new VertexAI({
+  project: 'gen-lang-client-0989083154', // Replace with your GCP project ID
+  location: 'us-west1',        // Replace with your preferred GCP region
+  googleAuthOptions: {
+    keyFilename: path.join(process.cwd(), 'serviceAccountKey.json'),
+  },
+});
+
+const model = vertexAI.getGenerativeModel({
+  model: 'gemini-1.5-flash',
+});
+
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    
+    const resp = await model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    });
+
+    const responseText = resp.response.candidates?.[0]?.content?.parts?.[0]?.text;
+    res.json({ text: responseText });
+  } catch (error) {
+    console.error('Vertex API Error:', error);
+    res.status(500).json({ error: 'Failed to generate content' });
+  }
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
