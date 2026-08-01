@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import { 
   getAuth, 
   GoogleAuthProvider, 
   signInWithPopup, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  User 
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -31,7 +32,7 @@ export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 // Authenticate with Google
-export async function signInWithGoogle() {
+export async function signInWithGoogle(): Promise<User> {
   try {
     const result = await signInWithPopup(auth, provider);
     return result.user;
@@ -48,7 +49,7 @@ export async function getIdToken(): Promise<string | null> {
   return await currentUser.getIdToken();
 }
 
-export async function signOutUser() {
+export async function signOutUser(): Promise<void> {
   try {
     await signOut(auth);
   } catch (error) {

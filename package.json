@@ -3,6 +3,7 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
+  "description": "A minimalist note book with embedded components, featuring an AI companion.",
   "scripts": {
     "dev": "tsx watch server.ts",
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.mjs",
@@ -15,7 +16,6 @@
     "@google-cloud/vertexai": "^1.12.0",
     "@google/genai": "^2.14.0",
     "@tailwindcss/vite": "^4.1.14",
-    "@types/dotenv": "^6.1.1",
     "@vitejs/plugin-react": "^5.0.4",
     "brace-expansion": "^5.0.9",
     "dotenv": "^17.4.2",
@@ -30,6 +30,7 @@
     "uuid": "^14.0.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.25",
     "@types/node": "^22.20.1",
     "autoprefixer": "^10.4.21",
@@ -43,16 +44,12 @@
     "protobufjs@7.6.5": true,
     "@firebase/util@1.15.1": true,
     "esbuild@0.28.1": true,
-    "esbuild@0.25.12": true,
     "@google/genai@1.52.0": true
   },
-  "description": "A minimalist note book with the possibility for embedded components, featuring an AI companion.",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isaiah9238/note-bookv2.git"
   },
-  "keywords": [],
   "bugs": {
     "url": "https://github.com/isaiah9238/note-bookv2/issues"
   },
