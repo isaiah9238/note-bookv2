@@ -27,7 +27,7 @@
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
     "react-firebase-hooks": "^5.1.1",
-    "uuid": "^14.0.1"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
@@ -42,9 +42,9 @@
   },
   "allowScripts": {
     "protobufjs@7.6.5": true,
-    "@firebase/util@1.15.1": true,
-    "esbuild@0.28.1": true,
-    "@google/genai@1.52.0": true
+    "@firebase/util@1.15.2": true,
+    "esbuild@0.25.12": true,
+    "@google/genai@2.15.0": true
   },
   "repository": {
     "type": "git",
