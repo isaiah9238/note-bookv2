@@ -25,8 +25,8 @@ import {
   Upload,
   AlertTriangle
 } from "lucide-react";
-import { Pipeline, VirtualFile } from "../Pipeline";
-import { Scanner, ScanIssue, Token } from "../Scanner";
+import { Pipeline, VirtualFile } from "./Pipeline";
+import { Scanner, ScanIssue, Token } from "./Scanner";
 
 interface CodeInspectorModalProps {
   isOpen: boolean;
